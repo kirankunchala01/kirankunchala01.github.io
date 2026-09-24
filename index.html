@@ -252,21 +252,15 @@
         <section id="about" class="relative bg-slate-900/80 border-y border-slate-800">
             <div class="about-container max-w-7xl mx-auto px-6 py-24 flex flex-col md:flex-row gap-12">
                 
-                <!-- Left Side: Canvas -->
+                <!-- Left Side: Canvas (Full Stack Diagram) -->
                 <div class="w-full md:w-1/2 h-[50vh] md:h-[80vh] relative about-image-wrapper rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/10 border border-slate-700 bg-slate-950 group">
-                    <canvas id="globeCanvas" class="absolute inset-0 w-full h-full cursor-crosshair"></canvas>
+                    <canvas id="stackCanvas" class="absolute inset-0 w-full h-full"></canvas>
                     <div class="absolute inset-0 bg-gradient-to-tr from-slate-900/80 via-transparent to-slate-900/80 z-10 pointer-events-none"></div>
                     
-                    <!-- Interactive Indicator -->
-                    <div class="absolute top-6 right-6 z-20 px-3 py-1.5 rounded-full bg-slate-900/60 border border-cyan-500/30 backdrop-blur-md flex items-center gap-2 pointer-events-none transition-opacity duration-300 group-hover:opacity-20">
-                        <i class='bx bx-mouse-alt text-cyan-400 animate-bounce'></i>
-                        <span class="text-xs font-mono text-cyan-400">Hover to rotate</span>
-                    </div>
-
                     <div class="absolute bottom-6 left-6 z-20 glass-panel p-4 rounded-xl border border-white/10 pointer-events-none">
                         <p class="font-mono text-cyan-400 text-sm mb-1">Architecture Status</p>
-                        <p class="text-white font-medium"><i class='bx bx-data animate-pulse mr-2'></i>Distributed Systems Sync</p>
-                        <p class="text-slate-400 text-xs mt-1">Global Async I/O Architecture</p>
+                        <p class="text-white font-medium"><i class='bx bx-layer animate-pulse mr-2'></i>3-Tier Async Stack</p>
+                        <p class="text-slate-400 text-xs mt-1">React -> FastAPI -> PostgreSQL</p>
                     </div>
                 </div>
 
@@ -382,13 +376,13 @@
                     <div class="project-panel">
                         <div class="max-w-6xl w-full flex flex-col lg:flex-row gap-12 items-center">
                             <div class="w-full lg:w-1/2">
-                                <!-- ARCHITECTURE ANIMATION CONTAINER -->
+                                <!-- STOCK TICKER ANIMATION CONTAINER -->
                                 <div class="w-full h-[300px] lg:h-[400px] rounded-xl shadow-2xl shadow-cyan-500/20 border border-slate-700 bg-slate-950 relative overflow-hidden flex items-center justify-center">
-                                    <canvas id="architectureCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                                    <canvas id="stockCanvas" class="absolute inset-0 w-full h-full"></canvas>
                                     <div class="absolute bottom-4 left-4 z-10">
                                         <div class="flex items-center gap-2">
                                             <div class="w-2 h-2 rounded-full bg-cyan-500 animate-pulse"></div>
-                                            <span class="text-cyan-500 font-mono text-xs">Async Endpoint Flow</span>
+                                            <span class="text-cyan-500 font-mono text-xs">Live WebSocket Stream</span>
                                         </div>
                                     </div>
                                 </div>
@@ -420,12 +414,12 @@
                     <div class="project-panel">
                         <div class="max-w-6xl w-full flex flex-col lg:flex-row gap-12 items-center">
                             <div class="w-full lg:w-1/2">
-                                <!-- LIVE STATS ANIMATION CONTAINER -->
+                                <!-- NEURAL NET ANIMATION CONTAINER -->
                                 <div class="w-full h-[300px] lg:h-[400px] rounded-xl shadow-2xl shadow-cyan-500/20 border border-slate-700 bg-slate-950 relative overflow-hidden flex flex-col p-4">
                                     <div class="grid grid-cols-2 gap-4 mb-4 relative z-10">
                                         <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-lg text-center">
                                             <span class="text-xs text-slate-400 font-mono block mb-1">ACCURACY (%)</span>
-                                            <div id="stat-bw" class="text-2xl text-cyan-400 font-mono font-bold">88.0</div>
+                                            <div id="stat-acc" class="text-2xl text-cyan-400 font-mono font-bold">88.0</div>
                                         </div>
                                         <div class="bg-slate-900/80 border border-slate-800 p-3 rounded-lg text-center">
                                             <span class="text-xs text-slate-400 font-mono block mb-1">INFERENCE LATENCY (ms)</span>
@@ -433,7 +427,7 @@
                                         </div>
                                     </div>
                                     <div class="flex-grow relative w-full border border-slate-800/50 rounded-lg overflow-hidden bg-slate-900/30">
-                                        <canvas id="chartCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                                        <canvas id="nlpCanvas" class="absolute inset-0 w-full h-full"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -464,12 +458,12 @@
                     <div class="project-panel">
                         <div class="max-w-6xl w-full flex flex-col lg:flex-row gap-12 items-center">
                             <div class="w-full lg:w-1/2">
-                                <!-- MATRIX CODE ANIMATION CONTAINER -->
+                                <!-- AUTH ANIMATION CONTAINER -->
                                 <div class="w-full h-[300px] lg:h-[400px] rounded-xl shadow-2xl shadow-cyan-500/20 border border-slate-700 bg-black relative overflow-hidden">
-                                    <canvas id="matrixCanvas" class="absolute inset-0 w-full h-full"></canvas>
+                                    <canvas id="authCanvas" class="absolute inset-0 w-full h-full"></canvas>
                                     <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
                                     <div class="absolute top-4 right-4 bg-black/60 px-2 py-1 rounded border border-green-500/30 backdrop-blur-sm">
-                                        <span class="text-green-500 font-mono text-xs">JWT_AUTH_VERIFIED</span>
+                                        <span class="text-green-500 font-mono text-xs">RBAC_MIDDLEWARE_ACTIVE</span>
                                     </div>
                                 </div>
                             </div>
@@ -620,9 +614,6 @@
                 <h2 class="text-3xl font-bold mb-10">Open a <span class="text-cyan-400">Connection</span></h2>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">
-                    <a href="mailto:kkiran0809@gmail.com" class="glass-panel px-6 py-4 rounded-xl hover:border-cyan-500/50 transition-colors flex items-center gap-3 text-slate-300 hover:text-cyan-400">
-                        <i class='bx bx-envelope text-2xl'></i> kkiran0809@gmail.com
-                    </a>
                     <a href="mailto:kirankunchala01@gmail.com" class="glass-panel px-6 py-4 rounded-xl hover:border-cyan-500/50 transition-colors flex items-center gap-3 text-slate-300 hover:text-cyan-400">
                         <i class='bx bx-envelope text-2xl'></i> kirankunchala01@gmail.com
                     </a>
@@ -643,7 +634,7 @@
     </div>
 
     <script>
-        // --- 1. Full Stack AST & Floating Code Cosmos ---
+        // --- 1. Full Stack AST & Floating Code Cosmos Background ---
         const canvas = document.getElementById('network-canvas');
         const ctx = canvas.getContext('2d');
         
@@ -768,7 +759,7 @@
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
             
-            // 1. Update and draw nodes, and check for architectural connections
+            // Update and draw nodes, and check for architectural connections
             for (let i = 0; i < syntaxNodes.length; i++) {
                 syntaxNodes[i].update();
                 
@@ -780,9 +771,7 @@
                         let dist = Math.sqrt(dx * dx + dy * dy);
 
                         if (dist < connectionDistance) {
-                            // Calculate opacity based on distance, and boost it if near mouse
                             let baseOpacity = (1 - dist / connectionDistance) * 0.15;
-                            
                             let midX = (syntaxNodes[i].x + syntaxNodes[j].x) / 2;
                             let midY = (syntaxNodes[i].y + syntaxNodes[j].y) / 2;
                             let distToMouse = Math.hypot(midX - mouse.x, midY - mouse.y);
@@ -800,43 +789,27 @@
                         }
                     }
                 }
-                
                 syntaxNodes[i].draw();
             }
 
-            // 2. Draw Interactive "IDE Cursor / Caret" around the mouse
+            // Draw Interactive "IDE Cursor / Caret" around the mouse
             if (mouse.x !== -1000 && mouse.y !== -1000) {
                 let time = Date.now();
-                
-                // Blinking Caret
                 if (Math.floor(time / 500) % 2 === 0) {
                     ctx.font = '20px "JetBrains Mono", monospace';
                     ctx.fillStyle = '#22d3ee';
                     ctx.fillText("|", mouse.x, mouse.y);
                 }
                 
-                // IDE Scope / Bounding Box Corners
                 let boxSize = 60;
                 let cLength = 10;
                 ctx.strokeStyle = 'rgba(34, 211, 238, 0.3)';
                 ctx.lineWidth = 1.5;
                 ctx.beginPath();
-                // Top Left
-                ctx.moveTo(mouse.x - boxSize, mouse.y - boxSize + cLength);
-                ctx.lineTo(mouse.x - boxSize, mouse.y - boxSize);
-                ctx.lineTo(mouse.x - boxSize + cLength, mouse.y - boxSize);
-                // Top Right
-                ctx.moveTo(mouse.x + boxSize - cLength, mouse.y - boxSize);
-                ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize);
-                ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize + cLength);
-                // Bottom Right
-                ctx.moveTo(mouse.x + boxSize, mouse.y + boxSize - cLength);
-                ctx.lineTo(mouse.x + boxSize, mouse.y + boxSize);
-                ctx.lineTo(mouse.x + boxSize - cLength, mouse.y + boxSize);
-                // Bottom Left
-                ctx.moveTo(mouse.x - boxSize + cLength, mouse.y + boxSize);
-                ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize);
-                ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize - cLength);
+                ctx.moveTo(mouse.x - boxSize, mouse.y - boxSize + cLength); ctx.lineTo(mouse.x - boxSize, mouse.y - boxSize); ctx.lineTo(mouse.x - boxSize + cLength, mouse.y - boxSize);
+                ctx.moveTo(mouse.x + boxSize - cLength, mouse.y - boxSize); ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize); ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize + cLength);
+                ctx.moveTo(mouse.x + boxSize, mouse.y + boxSize - cLength); ctx.lineTo(mouse.x + boxSize, mouse.y + boxSize); ctx.lineTo(mouse.x + boxSize - cLength, mouse.y + boxSize);
+                ctx.moveTo(mouse.x - boxSize + cLength, mouse.y + boxSize); ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize); ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize - cLength);
                 ctx.stroke();
             }
 
@@ -846,24 +819,13 @@
         initCanvas();
         animateCanvas();
 
-
         // --- 2. GSAP Scrollytelling Animations ---
         gsap.registerPlugin(ScrollTrigger, TextPlugin);
-
-        // Responsive ScrollTrigger logic using matchMedia
         let mm = gsap.matchMedia();
 
-        // -------------------------
-        // ALL SCREENS (GLOBAL GSAP)
-        // -------------------------
-
-        // Blink cursor infinitely
         gsap.to("#cursor", { opacity: 0, ease: "power2.inOut", repeat: -1, yoyo: true, duration: 0.4 });
-
-        // Hero initial load animation
         gsap.to(".hero-anim", { y: 0, opacity: 1, duration: 1, stagger: 0.2, ease: "power3.out" });
 
-        // About text fade in as you scroll
         gsap.utils.toArray(".about-block").forEach(block => {
             gsap.to(block, {
                 y: 0, opacity: 1,
@@ -871,13 +833,11 @@
             });
         });
 
-        // Experience Timeline: The node traveling down
         gsap.to(".timeline-progress", {
             height: "100%", ease: "none",
             scrollTrigger: { trigger: ".experience-section", start: "top center", end: "bottom center", scrub: true }
         });
 
-        // Experience items fade in and dots light up
         gsap.utils.toArray(".timeline-item").forEach(item => {
             let dot = item.querySelector(".node-dot");
             gsap.to(item, {
@@ -892,7 +852,6 @@
             }
         });
 
-        // Education section fade up
         gsap.utils.toArray(".edu-anim").forEach(card => {
             gsap.to(card, {
                 y: 0, opacity: 1, duration: 0.8, ease: "power3.out",
@@ -900,11 +859,7 @@
             });
         });
 
-        // -------------------------
-        // DESKTOP ONLY ANIMATIONS
-        // -------------------------
         mm.add("(min-width: 768px)", () => {
-            // About Section: Pin the image while text scrolls
             ScrollTrigger.create({
                 trigger: ".about-container",
                 start: "top 10%",
@@ -912,7 +867,6 @@
                 pin: ".about-image-wrapper",
             });
 
-            // Projects: Horizontal Scroll
             let projectSections = gsap.utils.toArray(".project-panel");
             let projectWrapper = document.querySelector(".projects-wrapper");
             
@@ -929,444 +883,342 @@
             });
         });
 
-        // -------------------------
-        // MOBILE ONLY ANIMATIONS
-        // -------------------------
         mm.add("(max-width: 767px)", () => {
-            // Fade up projects individually instead of horizontal scrolling
             gsap.utils.toArray(".project-panel").forEach(panel => {
                 gsap.from(panel, {
-                    opacity: 0,
-                    y: 50,
-                    duration: 0.8,
+                    opacity: 0, y: 50, duration: 0.8,
                     scrollTrigger: { trigger: panel, start: "top 85%" }
                 });
             });
         });
 
-        // --- 3. Project Visual Animations ---
-
-        // Utility to resize canvases
+        // --- 3. Project Visual Animations (FULL STACK THEMED) ---
         function resizeCanvas(canvas) {
+            if(!canvas || !canvas.parentElement) return { w: 0, h: 0 };
             const rect = canvas.parentElement.getBoundingClientRect();
             canvas.width = rect.width;
             canvas.height = rect.height;
             return { w: rect.width, h: rect.height };
         }
 
-        // --- Project 1: Rotating Globe (NOW INTERACTIVE) ---
-        const globeCanvas = document.getElementById('globeCanvas');
-        const gCtx = globeCanvas.getContext('2d');
-        let globeNodes = [];
-        const numGlobeNodes = 150;
-        let globeRotX = 0;
-        let globeRotY = 0;
-        
-        // Interactive Mouse variables for Globe
-        let targetGlobeRotX = 0;
-        let targetGlobeRotY = 0;
-        let isHoveringGlobe = false;
-        let globeLastX = null;
-        let globeLastY = null;
+        // About: 3-Tier Full Stack Architecture
+        const stackCanvas = document.getElementById('stackCanvas');
+        const stackCtx = stackCanvas ? stackCanvas.getContext('2d') : null;
+        let stackPackets = [];
 
-        // Globe Mouse Events - Hover to interact
-        globeCanvas.addEventListener('mouseenter', (e) => {
-            isHoveringGlobe = true;
-            globeLastX = e.clientX;
-            globeLastY = e.clientY;
-        });
+        // Project 1: Stock Candlestick Chart
+        const stockCanvas = document.getElementById('stockCanvas');
+        const stockCtx = stockCanvas ? stockCanvas.getContext('2d') : null;
+        let candles = [];
+        let stockTime = 0;
+        let currentPrice = 150;
 
-        globeCanvas.addEventListener('mouseleave', () => {
-            isHoveringGlobe = false;
-            globeLastX = null;
-            globeLastY = null;
-        });
+        // Project 2: NLP Neural Network
+        const nlpCanvas = document.getElementById('nlpCanvas');
+        const nlpCtx = nlpCanvas ? nlpCanvas.getContext('2d') : null;
+        let nlpPulses = [];
 
-        globeCanvas.addEventListener('mousemove', (e) => {
-            if(isHoveringGlobe && globeLastX !== null && globeLastY !== null) {
-                let dx = e.clientX - globeLastX;
-                let dy = e.clientY - globeLastY;
-                targetGlobeRotY += dx * 0.005;
-                targetGlobeRotX += dy * 0.005;
-                globeLastX = e.clientX;
-                globeLastY = e.clientY;
-            }
-        });
+        // Project 3: JWT Auth RBAC
+        const authCanvas = document.getElementById('authCanvas');
+        const authCtx = authCanvas ? authCanvas.getContext('2d') : null;
+        let authYOffset = 0;
 
-        // Fibonacci sphere distribution for even point spacing
-        for(let i=0; i<numGlobeNodes; i++) {
-            let phi = Math.acos(-1 + (2 * i) / numGlobeNodes);
-            let theta = Math.sqrt(numGlobeNodes * Math.PI) * phi;
-            globeNodes.push({
-                x: Math.cos(theta) * Math.sin(phi),
-                y: Math.sin(theta) * Math.sin(phi),
-                z: Math.cos(phi)
-            });
-        }
-
-        function drawGlobe() {
-            if(!globeCanvas.offsetParent) return; // skip if hidden
-            let { w, h } = resizeCanvas(globeCanvas);
-            gCtx.clearRect(0, 0, w, h);
+        function animateProjectVisuals() {
             
-            let radius = Math.min(w, h) * 0.4;
-            let cx = w / 2;
-            let cy = h / 2;
-
-            // Auto-rotate if not hovering
-            if (!isHoveringGlobe) {
-                targetGlobeRotY += 0.005;
-                targetGlobeRotX += 0.002;
-            }
-
-            // Smooth interpolation for rotation
-            globeRotX += (targetGlobeRotX - globeRotX) * 0.1;
-            globeRotY += (targetGlobeRotY - globeRotY) * 0.1;
-
-            let projectedNodes = [];
-
-            for(let i=0; i<numGlobeNodes; i++) {
-                let node = globeNodes[i];
+            // 1. Draw 3-Tier Stack (About)
+            if (stackCanvas && stackCanvas.offsetParent) {
+                let { w, h } = resizeCanvas(stackCanvas);
+                stackCtx.clearRect(0, 0, w, h);
                 
-                // Rotate Y
-                let x1 = node.x * Math.cos(globeRotY) - node.z * Math.sin(globeRotY);
-                let z1 = node.z * Math.cos(globeRotY) + node.x * Math.sin(globeRotY);
-                
-                // Rotate X
-                let y2 = node.y * Math.cos(globeRotX) - z1 * Math.sin(globeRotX);
-                let z2 = z1 * Math.cos(globeRotX) + node.y * Math.sin(globeRotX);
-                let x2 = x1;
+                const tiers = [
+                    { y: h*0.25, label: "Frontend (React.js)", color: "#06b6d4" }, // Cyan
+                    { y: h*0.50, label: "API (FastAPI)", color: "#a855f7" },       // Purple
+                    { y: h*0.75, label: "Database (PostgreSQL)", color: "#3b82f6" } // Blue
+                ];
 
-                // Simple Orthographic projection
-                let px = cx + x2 * radius;
-                let py = cy + y2 * radius;
-                
-                projectedNodes.push({px, py, z: z2});
+                // Vertical connecting line
+                stackCtx.strokeStyle = "rgba(255,255,255,0.1)";
+                stackCtx.lineWidth = 2;
+                stackCtx.beginPath();
+                stackCtx.moveTo(w/2, tiers[0].y);
+                stackCtx.lineTo(w/2, tiers[2].y);
+                stackCtx.stroke();
 
-                // Draw dots (fade back ones)
-                let alpha = (z2 + 1) / 2; // 0 to 1 based on depth
-                gCtx.beginPath();
-                gCtx.arc(px, py, 2, 0, Math.PI * 2);
-                gCtx.fillStyle = `rgba(6, 182, 212, ${alpha * 0.8})`;
-                gCtx.fill();
-            }
+                // Generate Data Packets
+                if (Math.random() < 0.05) {
+                    let dir = Math.random() > 0.5 ? 1 : -1;
+                    stackPackets.push({
+                        y: dir === 1 ? tiers[0].y : tiers[2].y,
+                        targetY: dir === 1 ? tiers[2].y : tiers[0].y,
+                        speed: dir * (Math.random() * 2 + 1),
+                        color: dir === 1 ? "#06b6d4" : "#3b82f6"
+                    });
+                }
 
-            // Draw connecting lines
-            gCtx.lineWidth = 0.5;
-            for(let i=0; i<numGlobeNodes; i++) {
-                for(let j=i+1; j<numGlobeNodes; j++) {
-                    let dx = globeNodes[i].x - globeNodes[j].x;
-                    let dy = globeNodes[i].y - globeNodes[j].y;
-                    let dz = globeNodes[i].z - globeNodes[j].z;
-                    let dist = Math.sqrt(dx*dx + dy*dy + dz*dz);
+                // Update & Draw Packets
+                for(let i=stackPackets.length-1; i>=0; i--) {
+                    let p = stackPackets[i];
+                    p.y += p.speed;
                     
-                    if(dist < 0.3) {
-                        let n1 = projectedNodes[i];
-                        let n2 = projectedNodes[j];
-                        let alpha = ((n1.z + n2.z + 2) / 4) * 0.4; // depth based opacity
-                        
-                        gCtx.beginPath();
-                        gCtx.strokeStyle = `rgba(34, 211, 238, ${alpha})`;
-                        gCtx.moveTo(n1.px, n1.py);
-                        gCtx.lineTo(n2.px, n2.py);
-                        gCtx.stroke();
+                    stackCtx.beginPath();
+                    stackCtx.arc(w/2, p.y, 4, 0, Math.PI*2);
+                    stackCtx.fillStyle = '#fff'; // White core
+                    stackCtx.shadowBlur = 10;
+                    stackCtx.shadowColor = p.color; // Colored glow
+                    stackCtx.fill();
+                    stackCtx.shadowBlur = 0;
+
+                    if ((p.speed > 0 && p.y > p.targetY) || (p.speed < 0 && p.y < p.targetY)) {
+                        stackPackets.splice(i, 1);
                     }
                 }
-            }
-        }
 
-        // --- Project 2: Live Stats ---
-        const chartCanvas = document.getElementById('chartCanvas');
-        const cCtx = chartCanvas.getContext('2d');
-        const statBw = document.getElementById('stat-bw');
-        const statLat = document.getElementById('stat-lat');
-        
-        let bwData = new Array(50).fill(88);
-        let latData = new Array(50).fill(14);
-        let statFrameCounter = 0;
-
-        function drawChart() {
-            if(!chartCanvas.offsetParent) return;
-            let { w, h } = resizeCanvas(chartCanvas);
-            cCtx.clearRect(0, 0, w, h);
-
-            // Update data every few frames
-            statFrameCounter++;
-            if(statFrameCounter > 5) {
-                statFrameCounter = 0;
-                
-                // shift and add new random data
-                bwData.shift();
-                let nextBw = bwData[bwData.length-1] + (Math.random() - 0.5) * 2;
-                nextBw = Math.max(80, Math.min(nextBw, 95)); // clamp
-                bwData.push(nextBw);
-                statBw.innerText = nextBw.toFixed(1);
-
-                latData.shift();
-                let nextLat = latData[latData.length-1] + (Math.random() - 0.5) * 4;
-                nextLat = Math.max(10, Math.min(nextLat, 25));
-                latData.push(nextLat);
-                statLat.innerText = Math.round(nextLat);
-            }
-
-            let slice = w / (bwData.length - 1);
-
-            // Draw Grid
-            cCtx.strokeStyle = "rgba(255,255,255,0.05)";
-            cCtx.lineWidth = 1;
-            cCtx.beginPath();
-            for(let i=0; i<w; i+=slice*5) { cCtx.moveTo(i, 0); cCtx.lineTo(i, h); }
-            for(let i=0; i<h; i+=h/4) { cCtx.moveTo(0, i); cCtx.lineTo(w, i); }
-            cCtx.stroke();
-
-            // Draw Accuracy Line (Cyan)
-            cCtx.beginPath();
-            cCtx.strokeStyle = "#22d3ee"; // cyan-400
-            cCtx.lineWidth = 2;
-            for(let i=0; i<bwData.length; i++) {
-                let x = i * slice;
-                let y = h - ((bwData[i] / 100) * h); // max 100%
-                if(i===0) cCtx.moveTo(x, y);
-                else cCtx.lineTo(x, y);
-            }
-            cCtx.stroke();
-            
-            // Draw Latency Line (Purple)
-            cCtx.beginPath();
-            cCtx.strokeStyle = "#c084fc"; // purple-400
-            cCtx.lineWidth = 2;
-            for(let i=0; i<latData.length; i++) {
-                let x = i * slice;
-                let y = h - ((latData[i] / 50) * h); // max 50ms
-                if(i===0) cCtx.moveTo(x, y);
-                else cCtx.lineTo(x, y);
-            }
-            cCtx.stroke();
-        }
-
-        // --- Project 3: Matrix Code ---
-        const matrixCanvas = document.getElementById('matrixCanvas');
-        const mCtx = matrixCanvas.getContext('2d');
-        
-        const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-        const fontSize = 14;
-        let columns = 0;
-        let drops = [];
-
-        function initMatrix() {
-            let { w } = resizeCanvas(matrixCanvas);
-            columns = Math.floor(w / fontSize);
-            drops = [];
-            for (let i = 0; i < columns; i++) {
-                drops[i] = Math.random() * -100; // start off-screen randomly
-            }
-        }
-        initMatrix();
-        window.addEventListener('resize', initMatrix);
-
-        function drawMatrix() {
-            if(!matrixCanvas.offsetParent) return;
-            let { w, h } = resizeCanvas(matrixCanvas);
-            
-            // Semi-transparent black to create fade effect
-            mCtx.fillStyle = "rgba(0, 0, 0, 0.1)";
-            mCtx.fillRect(0, 0, w, h);
-
-            mCtx.fillStyle = "#22c55e"; // green-500
-            mCtx.font = fontSize + "px monospace";
-
-            for (let i = 0; i < drops.length; i++) {
-                let text = chars[Math.floor(Math.random() * chars.length)];
-                
-                // Draw character
-                let x = i * fontSize;
-                let y = drops[i] * fontSize;
-                
-                // Highlight head of the stream
-                if(Math.random() > 0.9) mCtx.fillStyle = "#fff";
-                else mCtx.fillStyle = "#22c55e";
-                
-                mCtx.fillText(text, x, y);
-
-                // Reset drop to top randomly
-                if (y > h && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        // --- Architecture Section: Network Data Flow (NOW INTERACTIVE) ---
-        const archCanvas = document.getElementById('architectureCanvas');
-        const aCtx = archCanvas.getContext('2d');
-        let archNodes = [];
-        let archLinks = [];
-        let archPackets = [];
-        
-        // Interactive Mouse Scanner
-        let archMouse = { x: null, y: null };
-        
-        archCanvas.addEventListener('mousemove', (e) => {
-            const rect = archCanvas.getBoundingClientRect();
-            archMouse.x = e.clientX - rect.left;
-            archMouse.y = e.clientY - rect.top;
-        });
-        archCanvas.addEventListener('mouseleave', () => {
-            archMouse.x = null;
-            archMouse.y = null;
-        });
-
-        function initArch() {
-            if(!archCanvas) return;
-            let { w, h } = resizeCanvas(archCanvas);
-            archNodes = [];
-            archLinks = [];
-            archPackets = [];
-
-            // Create nodes
-            const numNodes = 30;
-            for(let i=0; i<numNodes; i++) {
-                archNodes.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    pulse: Math.random() * Math.PI * 2
-                });
-            }
-
-            // Create links between close nodes
-            for(let i=0; i<numNodes; i++) {
-                for(let j=i+1; j<numNodes; j++) {
-                    let dx = archNodes[i].x - archNodes[j].x;
-                    let dy = archNodes[i].y - archNodes[j].y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    if(dist < (Math.min(w, h) * 0.35)) {
-                        archLinks.push({ source: i, target: j });
-                    }
-                }
-            }
-        }
-        initArch();
-        window.addEventListener('resize', initArch);
-
-        function drawArch() {
-            if(!archCanvas.offsetParent) return;
-            let { w, h } = resizeCanvas(archCanvas);
-            
-            // Fading trail effect
-            aCtx.fillStyle = 'rgba(2, 6, 23, 0.3)'; // slate-950
-            aCtx.fillRect(0, 0, w, h);
-
-            // Draw Links
-            aCtx.lineWidth = 1;
-            aCtx.strokeStyle = 'rgba(34, 211, 238, 0.1)';
-            archLinks.forEach(link => {
-                let n1 = archNodes[link.source];
-                let n2 = archNodes[link.target];
-                aCtx.beginPath();
-                aCtx.moveTo(n1.x, n1.y);
-                aCtx.lineTo(n2.x, n2.y);
-                aCtx.stroke();
-            });
-
-            // Draw Nodes
-            archNodes.forEach(node => {
-                node.pulse += 0.05;
-                let r = 2 + Math.sin(node.pulse) * 1;
-                
-                aCtx.beginPath();
-                aCtx.arc(node.x, node.y, r, 0, Math.PI * 2);
-                aCtx.fillStyle = '#06b6d4';
-                aCtx.fill();
-                
-                // Outer glow
-                aCtx.beginPath();
-                aCtx.arc(node.x, node.y, r + 4, 0, Math.PI * 2);
-                aCtx.fillStyle = `rgba(6, 182, 212, ${0.1 + Math.sin(node.pulse)*0.1})`;
-                aCtx.fill();
-            });
-
-            // Spawn Data Packets
-            if(Math.random() < 0.3 && archLinks.length > 0) {
-                let link = archLinks[Math.floor(Math.random() * archLinks.length)];
-                let reverse = Math.random() > 0.5;
-                archPackets.push({
-                    source: reverse ? link.target : link.source,
-                    target: reverse ? link.source : link.target,
-                    progress: 0,
-                    speed: 0.01 + (Math.random() * 0.02)
-                });
-            }
-
-            // Update and Draw Packets
-            for(let i = archPackets.length - 1; i >= 0; i--) {
-                let p = archPackets[i];
-                p.progress += p.speed;
-                
-                if(p.progress >= 1) {
-                    archPackets.splice(i, 1);
-                    continue;
-                }
-                
-                let n1 = archNodes[p.source];
-                let n2 = archNodes[p.target];
-                let px = n1.x + (n2.x - n1.x) * p.progress;
-                let py = n1.y + (n2.y - n1.y) * p.progress;
-
-                aCtx.beginPath();
-                aCtx.arc(px, py, 2, 0, Math.PI * 2);
-                aCtx.fillStyle = '#fff'; // white core
-                aCtx.shadowBlur = 10;
-                aCtx.shadowColor = '#22d3ee'; // cyan glow
-                aCtx.fill();
-                aCtx.shadowBlur = 0; // reset for other elements
-            }
-            
-            // --- Interactive Diagnostic Scanner (Mouse Hover) ---
-            if(archMouse.x !== null && archMouse.y !== null) {
-                // Draw Radar Ring
-                aCtx.beginPath();
-                aCtx.arc(archMouse.x, archMouse.y, 60, 0, Math.PI * 2);
-                aCtx.strokeStyle = 'rgba(34, 211, 238, 0.3)';
-                aCtx.lineWidth = 1;
-                aCtx.stroke();
-                
-                // Draw Inner Core
-                aCtx.beginPath();
-                aCtx.arc(archMouse.x, archMouse.y, 30, 0, Math.PI * 2);
-                aCtx.fillStyle = 'rgba(34, 211, 238, 0.05)';
-                aCtx.fill();
-
-                // Ping nearby nodes
-                archNodes.forEach(node => {
-                    let dx = archMouse.x - node.x;
-                    let dy = archMouse.y - node.y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
+                // Draw Tier Boxes
+                tiers.forEach(t => {
+                    let boxW = 200;
+                    let boxH = 40;
+                    stackCtx.fillStyle = "rgba(15, 23, 42, 0.9)";
+                    stackCtx.strokeStyle = t.color;
+                    stackCtx.lineWidth = 2;
                     
-                    if(dist < 120) {
-                        // Draw Ping line
-                        aCtx.beginPath();
-                        aCtx.moveTo(archMouse.x, archMouse.y);
-                        aCtx.lineTo(node.x, node.y);
-                        aCtx.strokeStyle = `rgba(34, 211, 238, ${1 - dist/120})`;
-                        aCtx.lineWidth = 1.5;
-                        aCtx.stroke();
-                        
-                        // Force node to pulse brightly (simulating a response)
-                        node.pulse = Math.PI / 2; 
-                    }
+                    stackCtx.fillRect(w/2 - boxW/2, t.y - boxH/2, boxW, boxH);
+                    stackCtx.strokeRect(w/2 - boxW/2, t.y - boxH/2, boxW, boxH);
+
+                    stackCtx.font = "bold 14px 'JetBrains Mono', monospace";
+                    stackCtx.fillStyle = t.color;
+                    stackCtx.textAlign = "center";
+                    stackCtx.textBaseline = "middle";
+                    stackCtx.fillText(t.label, w/2, t.y);
                 });
             }
+
+            // 2. Draw Stock Candlesticks (Project 1)
+            if (stockCanvas && stockCanvas.offsetParent) {
+                let { w, h } = resizeCanvas(stockCanvas);
+                stockCtx.clearRect(0, 0, w, h);
+
+                stockTime++;
+                if (stockTime % 12 === 0) {
+                    let volatility = (Math.random() - 0.5) * 10;
+                    let open = currentPrice;
+                    let close = currentPrice + volatility;
+                    let high = Math.max(open, close) + Math.random() * 5;
+                    let low = Math.min(open, close) - Math.random() * 5;
+                    currentPrice = close;
+                    
+                    // Keep price in frame
+                    if(currentPrice > 250) currentPrice -= 20;
+                    if(currentPrice < 50) currentPrice += 20;
+
+                    candles.push({ open, close, high, low, x: w });
+                }
+
+                // Background Grid
+                stockCtx.strokeStyle = "rgba(255,255,255,0.05)";
+                stockCtx.lineWidth = 1;
+                stockCtx.beginPath();
+                for(let i=0; i<w; i+=50) { stockCtx.moveTo(i, 0); stockCtx.lineTo(i, h); }
+                for(let i=0; i<h; i+=50) { stockCtx.moveTo(0, i); stockCtx.lineTo(w, i); }
+                stockCtx.stroke();
+
+                let candleWidth = 10;
+                let scaleY = h / 300;
+                let yOffset = h * 0.9;
+
+                for(let i=candles.length-1; i>=0; i--) {
+                    let c = candles[i];
+                    c.x -= 2; // scroll speed
+                    
+                    if (c.x < -20) {
+                        candles.splice(i, 1);
+                        continue;
+                    }
+
+                    let isUp = c.close >= c.open;
+                    let color = isUp ? "#22c55e" : "#ef4444"; // green or red
+
+                    let yOpen = yOffset - (c.open * scaleY);
+                    let yClose = yOffset - (c.close * scaleY);
+                    let yHigh = yOffset - (c.high * scaleY);
+                    let yLow = yOffset - (c.low * scaleY);
+
+                    // Wick
+                    stockCtx.strokeStyle = color;
+                    stockCtx.lineWidth = 2;
+                    stockCtx.beginPath();
+                    stockCtx.moveTo(c.x, yHigh);
+                    stockCtx.lineTo(c.x, yLow);
+                    stockCtx.stroke();
+
+                    // Body
+                    stockCtx.fillStyle = color;
+                    let bodyH = Math.max(1, Math.abs(yOpen - yClose));
+                    stockCtx.fillRect(c.x - candleWidth/2, Math.min(yOpen, yClose), candleWidth, bodyH);
+                }
+            }
+
+            // 3. Draw NLP Neural Network (Project 2)
+            if (nlpCanvas && nlpCanvas.offsetParent) {
+                let { w, h } = resizeCanvas(nlpCanvas);
+                nlpCtx.clearRect(0, 0, w, h);
+
+                let layers = [4, 6, 2]; // Input, Hidden, Output
+                let nodes = [];
+
+                // Static node positions
+                layers.forEach((count, lIdx) => {
+                    let x = w * (0.2 + (lIdx * 0.3));
+                    let spacingY = h / (count + 1);
+                    for(let i=0; i<count; i++) {
+                        nodes.push({ x, y: spacingY * (i+1), layer: lIdx });
+                    }
+                });
+
+                // Connections
+                nlpCtx.strokeStyle = "rgba(34, 211, 238, 0.1)"; // Cyan lines
+                nlpCtx.lineWidth = 1;
+                nlpCtx.beginPath();
+                nodes.forEach(n1 => {
+                    nodes.forEach(n2 => {
+                        if (n2.layer === n1.layer + 1) {
+                            nlpCtx.moveTo(n1.x, n1.y);
+                            nlpCtx.lineTo(n2.x, n2.y);
+                        }
+                    });
+                });
+                nlpCtx.stroke();
+
+                // Spawn Pulses
+                if(Math.random() < 0.1) {
+                    let startNodes = nodes.filter(n => n.layer === 0);
+                    let endNodes = nodes.filter(n => n.layer === 1);
+                    let s = startNodes[Math.floor(Math.random()*startNodes.length)];
+                    let e = endNodes[Math.floor(Math.random()*endNodes.length)];
+                    nlpPulses.push({
+                        x1: s.x, y1: s.y, x2: e.x, y2: e.y, progress: 0, nextLayer: 1, endNode: e
+                    });
+                }
+
+                // Move Pulses
+                for(let i=nlpPulses.length-1; i>=0; i--) {
+                    let p = nlpPulses[i];
+                    p.progress += 0.05;
+
+                    let cx = p.x1 + (p.x2 - p.x1) * p.progress;
+                    let cy = p.y1 + (p.y2 - p.y1) * p.progress;
+
+                    nlpCtx.beginPath();
+                    nlpCtx.arc(cx, cy, 3, 0, Math.PI*2);
+                    nlpCtx.fillStyle = "#c084fc"; // Purple pulse
+                    nlpCtx.shadowBlur = 10;
+                    nlpCtx.shadowColor = "#c084fc";
+                    nlpCtx.fill();
+                    nlpCtx.shadowBlur = 0;
+
+                    if (p.progress >= 1) {
+                        if (p.nextLayer === 1) {
+                            let endNodes = nodes.filter(n => n.layer === 2);
+                            let e = endNodes[Math.floor(Math.random()*endNodes.length)];
+                            p.x1 = p.endNode.x; p.y1 = p.endNode.y;
+                            p.x2 = e.x; p.y2 = e.y;
+                            p.progress = 0;
+                            p.nextLayer = 2;
+                            p.endNode = e;
+                        } else {
+                            nlpPulses.splice(i, 1);
+                            
+                            // Update HTML Stats
+                            let statAcc = document.getElementById('stat-acc');
+                            if(statAcc && Math.random() > 0.8) statAcc.innerText = (85 + Math.random() * 5).toFixed(1);
+                            
+                            let statLat = document.getElementById('stat-lat');
+                            if(statLat && Math.random() > 0.8) statLat.innerText = Math.floor(10 + Math.random() * 8);
+                        }
+                    }
+                }
+
+                // Draw Node Circles
+                nodes.forEach(n => {
+                    nlpCtx.beginPath();
+                    nlpCtx.arc(n.x, n.y, 6, 0, Math.PI*2);
+                    nlpCtx.fillStyle = "#0f172a";
+                    nlpCtx.strokeStyle = "#22d3ee";
+                    nlpCtx.lineWidth = 2;
+                    nlpCtx.fill();
+                    nlpCtx.stroke();
+                });
+            }
+
+            // 4. Draw Auth JWT Security (Project 3)
+            if (authCanvas && authCanvas.offsetParent) {
+                let { w, h } = resizeCanvas(authCanvas);
+                authCtx.clearRect(0, 0, w, h);
+
+                authCtx.fillStyle = "rgba(0, 0, 0, 0.1)"; // Fading tail
+                authCtx.fillRect(0,0,w,h);
+
+                authYOffset -= 1; // Scroll speed
+                if(authYOffset < -100) authYOffset = 0;
+
+                authCtx.font = "12px 'JetBrains Mono', monospace";
+                authCtx.fillStyle = "rgba(34, 197, 94, 0.4)"; // Faint green text
+
+                const texts = [
+                    "{ 'alg': 'HS256', 'typ': 'JWT' }",
+                    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9",
+                    "{ 'sub': 'user4800', 'role': 'admin', 'iat': 1699990000 }",
+                    "MIDDLEWARE_CHECK: Role validates to ADMIN",
+                    "SIGNATURE_VALID = TRUE",
+                    "Bearer eyJhbGciOi...",
+                    "ACCESS_GRANTED: 200 OK"
+                ];
+
+                for(let i=0; i<15; i++) {
+                    let text = texts[i % texts.length];
+                    authCtx.fillText(text, 20, (i*30) + authYOffset + (h/2));
+                }
+
+                let cx = w/2;
+                let cy = h/2;
+                let pulse = Math.abs(Math.sin(Date.now() * 0.002));
+                
+                // Lock glow
+                authCtx.beginPath();
+                authCtx.arc(cx, cy, 40, 0, Math.PI*2);
+                authCtx.fillStyle = `rgba(34, 197, 94, ${0.1 + pulse*0.1})`; // Green
+                authCtx.fill();
+
+                // Lock shape
+                authCtx.strokeStyle = "#22c55e"; // Green stroke
+                authCtx.lineWidth = 3;
+                authCtx.beginPath();
+                authCtx.rect(cx - 20, cy - 10, 40, 30);
+                authCtx.moveTo(cx - 10, cy - 10);
+                authCtx.arc(cx, cy - 10, 10, Math.PI, 0);
+                authCtx.stroke();
+
+                // Keyhole
+                authCtx.fillStyle = "#22c55e";
+                authCtx.beginPath();
+                authCtx.arc(cx, cy + 2, 4, 0, Math.PI*2);
+                authCtx.rect(cx - 2, cy + 2, 4, 8);
+                authCtx.fill();
+
+                // Scanning laser line
+                let scanY = cy - 40 + (Date.now() * 0.05) % 80;
+                authCtx.strokeStyle = "rgba(34, 197, 94, 0.8)";
+                authCtx.lineWidth = 2;
+                authCtx.beginPath();
+                authCtx.moveTo(cx - 50, scanY);
+                authCtx.lineTo(cx + 50, scanY);
+                authCtx.stroke();
+            }
+
+            requestAnimationFrame(animateProjectVisuals);
         }
 
-        // --- Master Animation Loop for all Visuals ---
-        function animateVisuals() {
-            drawGlobe();
-            drawChart();
-            drawMatrix();
-            drawArch();
-            requestAnimationFrame(animateVisuals);
-        }
-        animateVisuals();
+        // Start project visuals loop
+        requestAnimationFrame(animateProjectVisuals);
 
     </script>
 </body>
