@@ -620,6 +620,9 @@
                 <h2 class="text-3xl font-bold mb-10">Open a <span class="text-cyan-400">Connection</span></h2>
                 
                 <div class="flex flex-wrap justify-center gap-6 mb-12">
+                    <a href="mailto:kkiran0809@gmail.com" class="glass-panel px-6 py-4 rounded-xl hover:border-cyan-500/50 transition-colors flex items-center gap-3 text-slate-300 hover:text-cyan-400">
+                        <i class='bx bx-envelope text-2xl'></i> kkiran0809@gmail.com
+                    </a>
                     <a href="mailto:kirankunchala01@gmail.com" class="glass-panel px-6 py-4 rounded-xl hover:border-cyan-500/50 transition-colors flex items-center gap-3 text-slate-300 hover:text-cyan-400">
                         <i class='bx bx-envelope text-2xl'></i> kirankunchala01@gmail.com
                     </a>
@@ -630,7 +633,7 @@
                         <i class='bx bxl-linkedin text-2xl'></i> LinkedIn Profile
                     </a>
                     <div class="glass-panel px-6 py-4 rounded-xl flex items-center gap-3 text-slate-300">
-                        <i class='bx bx-map text-2xl text-cyan-600'></i> Chicago, IL
+                        <i class='bx bx-map text-2xl text-cyan-600'></i> Salt Lake City, UT
                     </div>
                 </div>
 
@@ -640,24 +643,42 @@
     </div>
 
     <script>
-        // --- 1. Interactive Network Canvas Animation ---
+        // --- 1. Full Stack AST & Floating Code Cosmos ---
         const canvas = document.getElementById('network-canvas');
         const ctx = canvas.getContext('2d');
         
         let width, height;
-        let particles = [];
-        const connectionDistance = 150;
-        let mouse = { x: null, y: null };
+        let syntaxNodes = [];
+        const connectionDistance = 200;
+        let mouse = { x: -1000, y: -1000 };
+
+        // Tech stack tokens with RGB values for opacity manipulation
+        const techTokens = [
+            { text: 'def', color: '192, 132, 252' },       // Purple (Python)
+            { text: 'async', color: '192, 132, 252' },
+            { text: 'await', color: '192, 132, 252' },
+            { text: 'import', color: '244, 114, 182' },    // Pink (Keywords)
+            { text: 'return', color: '244, 114, 182' },
+            { text: '() =>', color: '96, 165, 250' },      // Blue (JS/Functions)
+            { text: 'useEffect', color: '96, 165, 250' },
+            { text: 'useState', color: '96, 165, 250' },
+            { text: '<App />', color: '34, 211, 238' },    // Cyan (React/JSX)
+            { text: '<div>', color: '34, 211, 238' },
+            { text: '{ }', color: '253, 224, 71' },        // Yellow (Brackets/Objects)
+            { text: '[ ]', color: '253, 224, 71' },
+            { text: 'SELECT', color: '74, 222, 128' },     // Green (SQL/DB)
+            { text: 'JOIN', color: '74, 222, 128' },
+            { text: 'FROM', color: '74, 222, 128' },
+            { text: 'FastAPI', color: '5, 150, 105' }      // Emerald
+        ];
 
         function initCanvas() {
             width = canvas.width = window.innerWidth;
             height = canvas.height = window.innerHeight;
+            createNodes();
         }
 
-        window.addEventListener('resize', () => {
-            initCanvas();
-            createParticles();
-        });
+        window.addEventListener('resize', initCanvas);
 
         document.addEventListener('mousemove', (e) => {
             mouse.x = e.clientX;
@@ -665,17 +686,19 @@
         });
 
         document.addEventListener('mouseleave', () => {
-            mouse.x = null;
-            mouse.y = null;
+            mouse.x = -1000;
+            mouse.y = -1000;
         });
 
-        class Particle {
+        class SyntaxNode {
             constructor() {
                 this.x = Math.random() * width;
                 this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 1;
-                this.vy = (Math.random() - 0.5) * 1;
-                this.radius = Math.random() * 2 + 1;
+                this.vx = (Math.random() - 0.5) * 0.5; // Very slow drift
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.token = techTokens[Math.floor(Math.random() * techTokens.length)];
+                this.size = Math.random() * 10 + 12; // Font size 12px to 22px
+                this.baseAlpha = Math.random() * 0.2 + 0.1; // Faint by default
                 this.pulse = Math.random() * Math.PI * 2;
             }
 
@@ -683,102 +706,144 @@
                 this.x += this.vx;
                 this.y += this.vy;
 
-                // Bounce off edges
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
+                // Seamless screen wrap
+                if (this.x < -50) this.x = width + 50;
+                if (this.x > width + 50) this.x = -50;
+                if (this.y < -50) this.y = height + 50;
+                if (this.y > height + 50) this.y = -50;
+                
+                this.pulse += 0.02;
             }
 
             draw() {
-                this.pulse += 0.05;
-                let r = this.radius + Math.sin(this.pulse) * 1;
+                let distToMouse = Math.hypot(this.x - mouse.x, this.y - mouse.y);
+                let alpha = this.baseAlpha + Math.sin(this.pulse) * 0.05;
+                let isHovered = false;
 
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, r, 0, Math.PI * 2);
-                ctx.fillStyle = '#06b6d4';
-                ctx.fill();
+                // Brighten up significantly if mouse is near
+                if (distToMouse < 200) {
+                    alpha += (1 - distToMouse / 200) * 0.6;
+                    isHovered = true;
+                }
 
-                // Outer glow
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, r + 4, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(6, 182, 212, ${0.2 + Math.sin(this.pulse)*0.15})`; // Increased glow opacity
-                ctx.fill();
+                ctx.font = `${this.size}px "JetBrains Mono", monospace`;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "middle";
+                ctx.fillStyle = `rgba(${this.token.color}, ${alpha})`;
+
+                // Add a glowing shadow if close to the mouse
+                if (isHovered && alpha > 0.5) {
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = `rgba(${this.token.color}, 0.8)`;
+                } else {
+                    ctx.shadowBlur = 0;
+                }
+
+                ctx.fillText(this.token.text, this.x, this.y);
+                ctx.shadowBlur = 0; // Reset
             }
         }
 
-        function createParticles() {
-            particles = [];
-            // Amount of particles based on screen size
-            let numParticles = Math.floor((width * height) / 10000); // Increased density from 15000 to 10000
-            for (let i = 0; i < numParticles; i++) {
-                particles.push(new Particle());
+        function createNodes() {
+            syntaxNodes = [];
+            let numNodes = Math.floor((width * height) / 18000); // Prevent overcrowding
+            for (let i = 0; i < numNodes; i++) {
+                syntaxNodes.push(new SyntaxNode());
             }
+        }
+
+        // Draw 90-degree flowchart-style lines to simulate software architecture
+        function drawOrthogonalLine(x1, y1, x2, y2, colorRGB, opacity) {
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            let midY = (y1 + y2) / 2;
+            ctx.lineTo(x1, midY);
+            ctx.lineTo(x2, midY);
+            ctx.lineTo(x2, y2);
+            ctx.strokeStyle = `rgba(${colorRGB}, ${opacity})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
         }
 
         function animateCanvas() {
             ctx.clearRect(0, 0, width, height);
             
-            for (let i = 0; i < particles.length; i++) {
-                particles[i].update();
-                particles[i].draw();
+            // 1. Update and draw nodes, and check for architectural connections
+            for (let i = 0; i < syntaxNodes.length; i++) {
+                syntaxNodes[i].update();
+                
+                // Only connect nodes that belong to the SAME tech stack (same color)
+                for (let j = i + 1; j < syntaxNodes.length; j++) {
+                    if (syntaxNodes[i].token.color === syntaxNodes[j].token.color) {
+                        let dx = syntaxNodes[i].x - syntaxNodes[j].x;
+                        let dy = syntaxNodes[i].y - syntaxNodes[j].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
 
-                // Draw lines between nearby nodes
-                for (let j = i + 1; j < particles.length; j++) {
-                    let dx = particles[i].x - particles[j].x;
-                    let dy = particles[i].y - particles[j].y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < connectionDistance) {
+                            // Calculate opacity based on distance, and boost it if near mouse
+                            let baseOpacity = (1 - dist / connectionDistance) * 0.15;
+                            
+                            let midX = (syntaxNodes[i].x + syntaxNodes[j].x) / 2;
+                            let midY = (syntaxNodes[i].y + syntaxNodes[j].y) / 2;
+                            let distToMouse = Math.hypot(midX - mouse.x, midY - mouse.y);
+                            
+                            if (distToMouse < 250) {
+                                baseOpacity += (1 - distToMouse / 250) * 0.4;
+                            }
 
-                    if (distance < connectionDistance) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(6, 182, 212, ${(1 - distance/connectionDistance) * 0.8})`; // Boosted line visibility
-                        ctx.lineWidth = 1.5; // Thicker lines
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.stroke();
+                            drawOrthogonalLine(
+                                syntaxNodes[i].x, syntaxNodes[i].y, 
+                                syntaxNodes[j].x, syntaxNodes[j].y, 
+                                syntaxNodes[i].token.color, 
+                                baseOpacity
+                            );
+                        }
                     }
                 }
+                
+                syntaxNodes[i].draw();
             }
 
-            // --- Interactive Diagnostic Scanner (Mouse Hover) for Global Background ---
-            if(mouse.x !== null && mouse.y !== null) {
-                // Draw Radar Ring
-                ctx.beginPath();
-                ctx.arc(mouse.x, mouse.y, 80, 0, Math.PI * 2);
-                ctx.strokeStyle = 'rgba(34, 211, 238, 0.6)'; // Increased radar ring opacity
-                ctx.lineWidth = 1.5;
-                ctx.stroke();
+            // 2. Draw Interactive "IDE Cursor / Caret" around the mouse
+            if (mouse.x !== -1000 && mouse.y !== -1000) {
+                let time = Date.now();
                 
-                // Draw Inner Core
+                // Blinking Caret
+                if (Math.floor(time / 500) % 2 === 0) {
+                    ctx.font = '20px "JetBrains Mono", monospace';
+                    ctx.fillStyle = '#22d3ee';
+                    ctx.fillText("|", mouse.x, mouse.y);
+                }
+                
+                // IDE Scope / Bounding Box Corners
+                let boxSize = 60;
+                let cLength = 10;
+                ctx.strokeStyle = 'rgba(34, 211, 238, 0.3)';
+                ctx.lineWidth = 1.5;
                 ctx.beginPath();
-                ctx.arc(mouse.x, mouse.y, 40, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(34, 211, 238, 0.15)'; // Increased core opacity
-                ctx.fill();
-
-                // Ping nearby nodes
-                particles.forEach(node => {
-                    let dx = mouse.x - node.x;
-                    let dy = mouse.y - node.y;
-                    let dist = Math.sqrt(dx*dx + dy*dy);
-                    
-                    if(dist < 150) {
-                        // Draw Ping line
-                        ctx.beginPath();
-                        ctx.moveTo(mouse.x, mouse.y);
-                        ctx.lineTo(node.x, node.y);
-                        ctx.strokeStyle = `rgba(34, 211, 238, ${1 - dist/150})`;
-                        ctx.lineWidth = 2; // Thicker ping line
-                        ctx.stroke();
-                        
-                        // Force node to pulse brightly (simulating a response)
-                        node.pulse = Math.PI / 2; 
-                    }
-                });
+                // Top Left
+                ctx.moveTo(mouse.x - boxSize, mouse.y - boxSize + cLength);
+                ctx.lineTo(mouse.x - boxSize, mouse.y - boxSize);
+                ctx.lineTo(mouse.x - boxSize + cLength, mouse.y - boxSize);
+                // Top Right
+                ctx.moveTo(mouse.x + boxSize - cLength, mouse.y - boxSize);
+                ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize);
+                ctx.lineTo(mouse.x + boxSize, mouse.y - boxSize + cLength);
+                // Bottom Right
+                ctx.moveTo(mouse.x + boxSize, mouse.y + boxSize - cLength);
+                ctx.lineTo(mouse.x + boxSize, mouse.y + boxSize);
+                ctx.lineTo(mouse.x + boxSize - cLength, mouse.y + boxSize);
+                // Bottom Left
+                ctx.moveTo(mouse.x - boxSize + cLength, mouse.y + boxSize);
+                ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize);
+                ctx.lineTo(mouse.x - boxSize, mouse.y + boxSize - cLength);
+                ctx.stroke();
             }
 
             requestAnimationFrame(animateCanvas);
         }
 
         initCanvas();
-        createParticles();
         animateCanvas();
 
 
